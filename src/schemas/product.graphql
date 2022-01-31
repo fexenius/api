@@ -1,0 +1,112 @@
+extend type Query {
+  products: [Product]!
+  product(id: ID!): Product!
+}
+
+type Product {
+  id: ID!
+  category: Category
+  name: String!
+  articles: [Article]
+  vendor: Vendor!
+  description: String
+  producer: [Producer]
+  importers: [Importer]
+  warranty: Int
+  productLifeTime: Int
+  serviceCenters: [ServiceCenter]
+  delivery: [Delivery]
+  lastUpdate: String
+  created: String
+}
+
+type Vendor {
+  id: ID!
+  name: String
+  img: Image
+}
+
+type Image {
+  id: ID!
+  src: String
+}
+
+type Importer {
+  id: ID
+  name: String
+  address: String
+}
+
+type Producer {
+  id: ID
+  name: String
+  address: String
+}
+
+type ServiceCenter {
+  id: ID
+  name: String
+  address: String
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createProduct(product: ProductInput): Product!
+  createFullProduct(product: ProductFullInput): Product!
+}
+
+input ProductInput {
+  category: ID!
+  name: String!
+  articles: [ID!]
+  vendor: VendorInput!
+  description: String
+  producer: [ProducerInput]
+  importers: [ImporterInput]
+  warranty: Int
+  productLifeTime: Int
+  serviceCenters: [ServiceCenterInput]
+  delivery: ID!
+  lastUpdate: String
+  created: String
+}
+
+input ProductFullInput {
+  category: ID!
+  name: String!
+  articles: [ArticleInput]
+  vendor: VendorInput!
+  description: String
+  producer: [ProducerInput]
+  importers: [ImporterInput]
+  warranty: Int
+  productLifeTime: Int
+  serviceCenters: [ServiceCenterInput]
+  delivery: [DeliveryInput]
+  lastUpdate: String
+  created: String
+}
+
+input VendorInput {
+  name: String
+  img: ImageInput
+}
+
+input ImageInput {
+  src: String
+}
+
+input ProducerInput {
+  name: String
+  address: String
+}
+
+input ImporterInput {
+  name: String
+  address: String
+}
+
+input ServiceCenterInput {
+  name: String
+  address: String
+}

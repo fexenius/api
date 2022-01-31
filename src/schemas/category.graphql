@@ -1,0 +1,31 @@
+extend type Query {
+  categories: [Category]!
+  category(id: ID!): Category!
+}
+
+type Category {
+  id: ID!
+  name: String
+  img: Image
+  parrent: Category
+}
+
+type Image {
+  id: ID!
+  src: String
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createCategory(category: CategoryInput): Category!
+}
+
+input CategoryInput {
+ name: String
+  img: ImageInput
+  parrent: ID
+}
+
+input ImageInput {
+  src: String
+}

@@ -1,0 +1,107 @@
+extend type Query {
+  articles: [Article]!
+  article(id: ID!): Article!
+}
+
+type Article {
+  id: ID!
+  productId: ID
+  vendorCode: String
+  model: String
+  price: Float
+  curency: String
+  attributes: [AttributeList]
+  assets: [Asset]
+  discount: Discount
+  payment: Payment
+  quantity: Int
+  stockStatus: Boolean
+  lastUpdate: Update
+}
+
+type AttributeList {
+  id: ID!
+  attribute: ID
+  value: String
+}
+
+type Asset {
+  images: [Image]
+}
+
+type Image {
+  id: ID!
+  src: String
+  title: String
+  width: Int
+  height: Int
+}
+
+type Payment {
+  isCashless: Boolean
+  isCredit: Boolean
+  installmentPlans: [Installment]
+}
+
+type Installment {
+  name: String
+  term: Int
+}
+
+type Update {
+  id: ID!
+  date: String
+  user: ID!
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createArticle(article: ArticleInput): Article!
+}
+
+input ArticleInput {
+  productId: ID
+  vendorCode: String
+  model: String
+  price: Float
+  curency: String
+  attributes: [AttributeListInput]
+  assets: [AssetInput]
+  discount: ID
+  payment: PaymentInput
+  quantity: Int
+  stockStatus: Boolean
+  lastUpdate: UpdateInput
+}
+
+input AttributeListInput {
+  attribute: ID
+  value: String
+}
+
+input AssetInput {
+  images: [ImageInput]
+}
+
+input ImageInput {
+  src: String
+  title: String
+  width: Int
+  height: Int
+}
+
+input PaymentInput {
+  isCashless: Boolean
+  isCredit: Boolean
+  installmentPlans: [InstallmentInput]
+}
+
+input InstallmentInput {
+  name: String
+  term: Int
+}
+
+input UpdateInput {
+  date: String
+  user: ID!
+}

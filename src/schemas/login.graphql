@@ -1,0 +1,15 @@
+type Token {
+  accessToken: String
+  refreshToken: String
+  message: String
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  login(input: LoginInput): Token!
+}
+
+input LoginInput {
+  username: String
+  password: String
+}

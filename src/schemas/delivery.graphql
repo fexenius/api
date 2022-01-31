@@ -1,0 +1,40 @@
+extend type Query {
+  delivery: [Delivery]!
+  getDelivery(id: ID!): Delivery!
+}
+
+type Delivery {
+  id: ID!
+  name: String
+  townTime: Int
+  countryTime: Int
+  prices: [Rate]
+  lastUpdate: Update
+}
+
+type Rate {
+  id: ID!
+  regionName: String
+  deliveryType: String
+  amount: Float
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createDelivery(delivery: DeliveryInput): Delivery!
+}
+
+input DeliveryInput {
+  name: String
+  townTime: Int
+  countryTime: Int
+  prices: [RateInput]
+  lastUpdate: UpdateInput
+  created: String
+}
+
+input RateInput {
+  regionName: String
+  deliveryType: String
+  amount: Float
+}

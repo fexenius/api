@@ -1,0 +1,49 @@
+extend type Query {
+  roles: [Role]!
+  role(roleTokenName: String!): Role!
+}
+
+type Role {
+  id: ID!
+  roleName: String!
+  roleTokenName: String!
+  description: String!
+  resources: [Resource]!
+  created: String
+}
+
+type Resource {
+  id: ID!
+  resourceName: String!
+  permission: [Permission]!
+}
+
+type Permission {
+  id: ID!
+  read: Boolean!
+  write: Boolean!
+  delete: Boolean!
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createRole(role: RoleInput): Role!
+}
+
+input RoleInput {
+  roleName: String!
+  roleTokenName: String!
+  description: String!
+  resources: [ResourceInput]
+}
+
+input ResourceInput {
+  resourceName: String!
+  permission: [PermissionInput]
+}
+
+input PermissionInput {
+  read: Boolean!
+  write: Boolean!
+  delete: Boolean!
+}

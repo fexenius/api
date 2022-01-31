@@ -1,0 +1,37 @@
+extend type Query {
+  attributes: [Attribute]!
+  attribute(attribute: ID!): Attribute!
+}
+
+type Attribute {
+  id: ID!
+  articleId: ID
+  category: CategoryAttribute
+  name: String!
+  description: String
+  type: String
+  values: [String]
+}
+
+type CategoryAttribute {
+  id: ID!
+  name: String!
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createAttribte(attribute: AttributeInput): Attribute!
+}
+
+input AttributeInput {
+  articleId: ID
+  category: CategoryAttributeInput
+  name: String!
+  description: String
+  type: String
+  values: [String]
+}
+
+input CategoryAttributeInput {
+  name: String!
+}

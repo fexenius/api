@@ -1,0 +1,39 @@
+extend type Query {
+  users: [User]!
+  user(id: ID!): User!
+}
+
+type User {
+  id: ID!
+  username: String
+  password: String
+  role: ID!
+  tokens: [Token]
+  created: String
+}
+
+type Token {
+  id: ID!
+  accessToken: String
+  refreshToken: String
+  fingerPrint: String
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createUser(user: UserInput): User!
+}
+
+input UserInput {
+  username: String
+  password: String
+  role: ID!
+  tokens: [TokenInput]
+  created: String
+}
+
+input TokenInput {
+  accessToken: String
+  refreshToken: String
+  fingerPrint: String
+}

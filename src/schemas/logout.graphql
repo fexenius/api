@@ -1,0 +1,8 @@
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  logout(input: AcessTokenInput): Boolean!
+}
+
+input AcessTokenInput {
+  accessToken: String
+}

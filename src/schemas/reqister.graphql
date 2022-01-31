@@ -1,0 +1,4 @@
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  register(input: LoginInput): Token!
+}

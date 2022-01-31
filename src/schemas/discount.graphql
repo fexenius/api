@@ -1,0 +1,40 @@
+extend type Query {
+  discounts: [Discount]!
+  discount(id: ID!): Discount!
+}
+
+type Discount {
+  id: ID!
+  name: String
+  description: String
+  percent: Float
+  aboutUrl: String
+  active: Boolean
+  validity: Validity
+  lastUpdate: Update
+}
+
+type Validity {
+  start: String
+  end: String
+}
+
+# mutation query extension - defined in index.graphql
+extend type Mutation {
+  createDiscount(discount: DiscountInput): Discount!
+}
+
+input DiscountInput {
+  name: String
+  description: String
+  percent: Float
+  aboutUrl: String
+  active: Boolean
+  validity: ValidityInput
+  lastUpdate: UpdateInput
+}
+
+input ValidityInput {
+  start: String
+  end: String
+}
