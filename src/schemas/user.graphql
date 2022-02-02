@@ -7,7 +7,7 @@ type User {
   id: ID!
   username: String
   password: String
-  role: ID!
+  role: ID
   tokens: [Token]
   created: String
 }

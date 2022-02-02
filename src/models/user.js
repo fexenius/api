@@ -5,7 +5,7 @@ let userSchema = new mongoose.Schema(
   {
     username: String,
     password: String,
-    role: { type: Schema.ObjectId, ref: "role", required: true },
+    role: { type: Schema.ObjectId, ref: "role" },
     tokens: [
       {
         accessToken: String,

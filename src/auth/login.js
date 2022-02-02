@@ -3,18 +3,17 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const User = require("../models/user");
-const Role = require("../models/role");
 
 const login = async function (username, password, fingerprint) {
   try {
     const user = await User.findOne({ username: username });
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
-        const role = await Role.findOne({ id: user.role });
+      //  const role = await Role.findOne({ id: user.role });
 
         // generate access token
         const accessToken = jwt.sign(
-          { uid: user.id, rtn: role.roleTokenName },
+          { uid: user.id },
           process.env.ACCESS_TOKEN_SECRET,
           { expiresIn: "20m" }
         );

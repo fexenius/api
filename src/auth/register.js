@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 const register = async function (username, password, fingerprint) {
   try {
-    const hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS));
 
     // Get default RoleName
     // const userRole = await Role.findOne({ roleName: "User" });
@@ -13,7 +13,6 @@ const register = async function (username, password, fingerprint) {
     await User.create({
       username: username,
       password: hashedPassword,
-      role: "usr",
     });
 
     const tokens = await login(username, password, fingerprint);
